@@ -6,20 +6,20 @@
 
 Local Const _
   $csURL  = 'https://www.infomed.ck.ua/download', _   ;
-  $csName = 'МІС МедІнфоСервіс'
-  $sBotKey = 'botXXXXXXXXXXXXXXXXXXXXXXX' 
+  $csName = 'РњР†РЎ РњРµРґР†РЅС„РѕРЎРµСЂРІС–СЃ'
+  $sBotKey = 'botXXXXXXXXXXXXXXXXXXXXXXX'
   $nChatId = 'XXXXXXXXXX'
   ;$nChatId2 = ''
   ;$nChatId3 = ''
 
 ;
 Local _
-  $sHTML, $sVersion, $sMsg,           _ ; текст страницы, версия, сообщ. о результате
-  $i, $iRC = 0                          ; код возврата
+  $sHTML, $sVersion, $sMsg,           _ ; С‚РµРєСЃС‚ СЃС‚СЂР°РЅРёС†С‹, РІРµСЂСЃРёСЏ, СЃРѕРѕР±С‰. Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Рµ
+  $i, $iRC = 0                          ; РєРѕРґ РІРѕР·РІСЂР°С‚Р°
 ;
-$sHTML = InetRead($csURL)                   ; читаем страницу
-$sHTML = BinaryToString($sHTML, $SB_UTF8)   ; преобр. в текст
-$sVersion = i_ParseVer($sHTML, $csName)     ; вытянуть версию
+$sHTML = InetRead($csURL)                   ; С‡РёС‚Р°РµРј СЃС‚СЂР°РЅРёС†Сѓ
+$sHTML = BinaryToString($sHTML, $SB_UTF8)   ; РїСЂРµРѕР±СЂ. РІ С‚РµРєСЃС‚
+$sVersion = i_ParseVer($sHTML, $csName)     ; РІС‹С‚СЏРЅСѓС‚СЊ РІРµСЂСЃРёСЋ
 If Not @error Then
     $sMsg =  $sVersion
     $i    = $MB_ICONINFORMATION
@@ -33,14 +33,14 @@ EndIf
 
 Local Const _
  $csURLxml  = 'https://www.infomed.ck.ua/public/clinic/'& $sVersion &'/clinic-'& $sVersion &'.xml', _   ;
- $csNameXML = 'full_version' ; имя параметра, значение к-рого надо выковырять из текста
+ $csNameXML = 'full_version' ; РёРјСЏ РїР°СЂР°РјРµС‚СЂР°, Р·РЅР°С‡РµРЅРёРµ Рє-СЂРѕРіРѕ РЅР°РґРѕ РІС‹РєРѕРІС‹СЂСЏС‚СЊ РёР· С‚РµРєСЃС‚Р°
  Local _
-  $sXML, $sVersion, $sMsg,            _ ; текст страницы, версия, сообщ. о результате
-  $i, $iRC = 0                          ; код возврата
+  $sXML, $sVersion, $sMsg,            _ ; С‚РµРєСЃС‚ СЃС‚СЂР°РЅРёС†С‹, РІРµСЂСЃРёСЏ, СЃРѕРѕР±С‰. Рѕ СЂРµР·СѓР»СЊС‚Р°С‚Рµ
+  $i, $iRC = 0                          ; РєРѕРґ РІРѕР·РІСЂР°С‚Р°
 ;
-$sXML = InetRead($csURLxml)                   ; читаем страницу
-$sXML = BinaryToString($sXML, $SB_ANSI)    ; преобр. в текст, и в данном случае кодировка = ANSI
-$sVersion = i_ParseVerXML($sXML, $csNameXML)     ; вытянуть версию
+$sXML = InetRead($csURLxml)                   ; С‡РёС‚Р°РµРј СЃС‚СЂР°РЅРёС†Сѓ
+$sXML = BinaryToString($sXML, $SB_ANSI)    ; РїСЂРµРѕР±СЂ. РІ С‚РµРєСЃС‚, Рё РІ РґР°РЅРЅРѕРј СЃР»СѓС‡Р°Рµ РєРѕРґРёСЂРѕРІРєР° = ANSI
+$sVersion = i_ParseVerXML($sXML, $csNameXML)     ; РІС‹С‚СЏРЅСѓС‚СЊ РІРµСЂСЃРёСЋ
 If Not @error Then
     $sMsg = StringFormat('Full ver=\t"%s"', $sVersion)
     $i    = $MB_ICONINFORMATION
@@ -57,7 +57,7 @@ $sCurentVer = IniRead ( "E:\Clinic\Ini\release.ini","releases","current","")
 ;MsgBox(48, "",$sCurentVer)
 if ($sCurentVer = $sVersion) Then
    Else
-   $sText = _URIEncode('Привет. Пора обновить программу. Новая версия: ' & $sVersion )
+   $sText = _URIEncode('РџСЂРёРІРµС‚. РџРѕСЂР° РѕР±РЅРѕРІРёС‚СЊ РїСЂРѕРіСЂР°РјРјСѓ. РќРѕРІР°СЏ РІРµСЂСЃРёСЏ: ' & $sVersion )
    ConsoleWrite(InetRead('https://api.telegram.org/' & $sBotKey & '/sendMessage?chat_id=' & $nChatId & '&text=' & $sText,  0))
   ;ConsoleWrite(InetRead('https://api.telegram.org/' & $sBotKey & '/sendMessage?chat_id=' & $nChatId2 & '&text=' & $sText,  0))
   ;ConsoleWrite(InetRead('https://api.telegram.org/' & $sBotKey & '/sendMessage?chat_id=' & $nChatId3 & '&text=' & $sText,  0))
@@ -65,20 +65,20 @@ EndIf
  ;}
 
 ;=============================================================
-; Функция парсера сайта
+; Р¤СѓРЅРєС†РёСЏ РїР°СЂСЃРµСЂР° СЃР°Р№С‚Р°
 Func i_ParseVer(ByRef Const $psSource, ByRef Const $psName)
   Local Const _
-    $csRExp = '(?isU)<a href="[^"]+">\s+„' & $psName & _
-              '“.+Версія:\s*(?-U)(\d+(?:\.\d+)+)'
+    $csRExp = '(?isU)<a href="[^"]+">\s+вЂћ' & $psName & _
+              'вЂњ.+Р’РµСЂСЃС–СЏ:\s*(?-U)(\d+(?:\.\d+)+)'
   Local $vRes
   $vRes = StringRegExp($psSource, $csRExp, $STR_REGEXPARRAYMATCH)
   If Not @error Then Return $vRes[0]
   Return SetError(1, 0, Null)
 EndFunc
 
-; Функция XML парсера
-Func i_ParseVerXML(ByRef Const $psSource, _  ; проверяемый текст, неважно откуда он взялся
-                ByRef Const $psName)      ; имя искомого параметра
+; Р¤СѓРЅРєС†РёСЏ XML РїР°СЂСЃРµСЂР°
+Func i_ParseVerXML(ByRef Const $psSource, _  ; РїСЂРѕРІРµСЂСЏРµРјС‹Р№ С‚РµРєСЃС‚, РЅРµРІР°Р¶РЅРѕ РѕС‚РєСѓРґР° РѕРЅ РІР·СЏР»СЃСЏ
+                ByRef Const $psName)      ; РёРјСЏ РёСЃРєРѕРјРѕРіРѕ РїР°СЂР°РјРµС‚СЂР°
   Local Const _
     $csRExp = '(?isU)<product .+' & $psName & _
               '\s*=\s*"(?-U)(\d+(?:\.\d+)+)"'
@@ -88,7 +88,7 @@ Func i_ParseVerXML(ByRef Const $psSource, _  ; проверяемый текст, неважно откуда
   Return SetError(1, 0, Null)
 EndFunc
 
-; Бот функция
+; Р‘РѕС‚ С„СѓРЅРєС†РёСЏ
 Func _URIEncode($sData)
     Local $aData = StringSplit(BinaryToString(StringToBinary($sData,4),1),"")
     Local $nChar
