@@ -1,26 +1,26 @@
 #comments-start
-Переменные
-mINI - Файл INI с конфигурацией для данных MIC
-mURL - адрес сайта мед инфо сервис
-mName - имя структуры для моиска
-mHTML - Переменная с данными страницы mURL
-mVersion - версия MIC
-mRExp - локальное регулятное выражение HTML
-$mVer - локальная версия HTML
-mURLxml - адрес к XML файлу
-mNameXML - параметру данные которого нужно получить
-mXML Переменная с данными страницы mNameXML
+РџРµСЂРµРјРµРЅРЅС‹Рµ
+mINI - Р¤Р°Р№Р» INI СЃ РєРѕРЅС„РёРіСѓСЂР°С†РёРµР№ РґР»СЏ РґР°РЅРЅС‹С… MIC
+mURL - Р°РґСЂРµСЃ СЃР°Р№С‚Р° РјРµРґ РёРЅС„Рѕ СЃРµСЂРІРёСЃ
+mName - РёРјСЏ СЃС‚СЂСѓРєС‚СѓСЂС‹ РґР»СЏ РјРѕРёСЃРєР°
+mHTML - РџРµСЂРµРјРµРЅРЅР°СЏ СЃ РґР°РЅРЅС‹РјРё СЃС‚СЂР°РЅРёС†С‹ mURL
+mVersion - РІРµСЂСЃРёСЏ MIC
+mRExp - Р»РѕРєР°Р»СЊРЅРѕРµ СЂРµРіСѓР»СЏС‚РЅРѕРµ РІС‹СЂР°Р¶РµРЅРёРµ HTML
+$mVer - Р»РѕРєР°Р»СЊРЅР°СЏ РІРµСЂСЃРёСЏ HTML
+mURLxml - Р°РґСЂРµСЃ Рє XML С„Р°Р№Р»Сѓ
+mNameXML - РїР°СЂР°РјРµС‚СЂСѓ РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ
+mXML РџРµСЂРµРјРµРЅРЅР°СЏ СЃ РґР°РЅРЅС‹РјРё СЃС‚СЂР°РЅРёС†С‹ mNameXML
 mVersINI -
 mCurentVer -
 
-tINI - Файл INI с конфигурацией для данных Telegram
+tINI - Р¤Р°Р№Р» INI СЃ РєРѕРЅС„РёРіСѓСЂР°С†РёРµР№ РґР»СЏ РґР°РЅРЅС‹С… Telegram
 tKey - Telegram BOT key
 tChat - Chat ID
-tText - Текст приветствие
-tTextCur - Текст перед установленной версией
-tTextNew - Текст передновой версией
+tText - РўРµРєСЃС‚ РїСЂРёРІРµС‚СЃС‚РІРёРµ
+tTextCur - РўРµРєСЃС‚ РїРµСЂРµРґ СѓСЃС‚Р°РЅРѕРІР»РµРЅРЅРѕР№ РІРµСЂСЃРёРµР№
+tTextNew - РўРµРєСЃС‚ РїРµСЂРµРґРЅРѕРІРѕР№ РІРµСЂСЃРёРµР№
 
-$cWeekday - параметр с номером дня недели, 1 - Воскресение .. 7 - Суботта
+$cWeekday - РїР°СЂР°РјРµС‚СЂ СЃ РЅРѕРјРµСЂРѕРј РґРЅСЏ РЅРµРґРµР»Рё, 1 - Р’РѕСЃРєСЂРµСЃРµРЅРёРµ .. 7 - РЎСѓР±РѕС‚С‚Р°
 #comments-end
 
 #include "./src/Telegram.au3"
@@ -36,19 +36,19 @@ main()
 
 Func main()
 $mINI = @WorkingDir &'\ini\mic.ini'
-$mURL = IniRead ($mINI, "MIC", "URL", "Укажите ссылку на страницу загрузки.")
-$mName = IniRead ($mINI, "MIC", "NAME", "Укажите данные для поиска.")
-$mURLxml = IniRead ($mINI, "MIC", "URL_XML", "Укажите адрес XML файла.")
-$mNameXML = IniRead ($mINI, "MIC", "NAME_XML", "Укажите параметр данные которого нужно получить.")
-$mVersINI = IniRead ($mINI, "MIC", "VERSION_INI", "Укажите путь в ini файлу с версией MIC.")
+$mURL = IniRead ($mINI, "MIC", "URL", "РЈРєР°Р¶РёС‚Рµ СЃСЃС‹Р»РєСѓ РЅР° СЃС‚СЂР°РЅРёС†Сѓ Р·Р°РіСЂСѓР·РєРё.")
+$mName = IniRead ($mINI, "MIC", "NAME", "РЈРєР°Р¶РёС‚Рµ РґР°РЅРЅС‹Рµ РґР»СЏ РїРѕРёСЃРєР°.")
+$mURLxml = IniRead ($mINI, "MIC", "URL_XML", "РЈРєР°Р¶РёС‚Рµ Р°РґСЂРµСЃ XML С„Р°Р№Р»Р°.")
+$mNameXML = IniRead ($mINI, "MIC", "NAME_XML", "РЈРєР°Р¶РёС‚Рµ РїР°СЂР°РјРµС‚СЂ РґР°РЅРЅС‹Рµ РєРѕС‚РѕСЂРѕРіРѕ РЅСѓР¶РЅРѕ РїРѕР»СѓС‡РёС‚СЊ.")
+$mVersINI = IniRead ($mINI, "MIC", "VERSION_INI", "РЈРєР°Р¶РёС‚Рµ РїСѓС‚СЊ РІ ini С„Р°Р№Р»Сѓ СЃ РІРµСЂСЃРёРµР№ MIC.")
 $mCurentVer= IniRead ($mVersINI,"releases","current","")
 
 $tINI = @WorkingDir &'\ini\telegram.ini'
-$tKey = IniRead ($tINI, "TELEGRAM", "KEY", "Укажите API ключ бота.")
-$tChat = IniRead ($tINI, "TELEGRAM", "CHAT", "Укажите CHAT ID.")
-$tText = IniRead ($tINI, "TELEGRAM", "TEXT", "Текст бота (приветствие)")
-$tTextCur = IniRead ($tINI, "TELEGRAM", "TEXT_VER_CUR", "Текст бота перед текущей версией")
-$tTextNew= IniRead ($tINI, "TELEGRAM", "TEXT_VER_NEW", "Текст бота перед новой версией")
+$tKey = IniRead ($tINI, "TELEGRAM", "KEY", "РЈРєР°Р¶РёС‚Рµ API РєР»СЋС‡ Р±РѕС‚Р°.")
+$tChat = IniRead ($tINI, "TELEGRAM", "CHAT", "РЈРєР°Р¶РёС‚Рµ CHAT ID.")
+$tText = IniRead ($tINI, "TELEGRAM", "TEXT", "РўРµРєСЃС‚ Р±РѕС‚Р° (РїСЂРёРІРµС‚СЃС‚РІРёРµ)")
+$tTextCur = IniRead ($tINI, "TELEGRAM", "TEXT_VER_CUR", "РўРµРєСЃС‚ Р±РѕС‚Р° РїРµСЂРµРґ С‚РµРєСѓС‰РµР№ РІРµСЂСЃРёРµР№")
+$tTextNew= IniRead ($tINI, "TELEGRAM", "TEXT_VER_NEW", "РўРµРєСЃС‚ Р±РѕС‚Р° РїРµСЂРµРґ РЅРѕРІРѕР№ РІРµСЂСЃРёРµР№")
 ;
 $mHTML = InetRead($mURL)
 $mHTML = BinaryToString($mHTML, $SB_UTF8)
@@ -64,7 +64,7 @@ if $mCurentVer < $mVersion Then _telegramBot($mCurentVer, $mVersion, $tKey, $tCh
 EndFunc
 
 Func _ParserHTML (ByRef Const $mHTML, ByRef Const $mName)
-    $mRExp = '(?isU)<a href="[^"]+">\s+„' & $mName & '“.+Версія:\s*(?-U)(\d+(?:\.\d+)+)'
+    $mRExp = '(?isU)<a href="[^"]+">\s+вЂћ' & $mName & 'вЂњ.+Р’РµСЂСЃС–СЏ:\s*(?-U)(\d+(?:\.\d+)+)'
   Local $mVer
   $mVer = StringRegExp($mHTML, $mRExp, $STR_REGEXPARRAYMATCH)
   If Not @error Then Return $mVer[0]
