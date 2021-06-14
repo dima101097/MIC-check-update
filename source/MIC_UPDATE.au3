@@ -32,7 +32,10 @@ AutoItWinSetTitle (@ScriptName)
 $cWeekday = _DateToDayOfWeek (@YEAR, @MON, @MDAY)
 if $cWeekday = 1 or $cWeekday = 7 Then Exit
 main()
+Global $mINI = @WorkingDir &'\ini\mic.ini'
+Global $tINI = @WorkingDir &'\ini\telegram.ini'
 
+ if ((FileOpen ( $mINI ) = -1) or (FileOpen ( $tINI ) = -1))  Then MsgBox (0,"Ошибка","Отсутствуют файлы конфигурации. " & @CRLF & 'Запустите "Config.exe" и проведите настройку.')
 
 Func main()
 $mINI = @WorkingDir &'\ini\mic.ini'
