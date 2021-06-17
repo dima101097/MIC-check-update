@@ -25,6 +25,14 @@ gLeft
 gHeight
 #comments-end
 
+#NoTrayIcon
+#pragma compile(Out, Settings.exe)
+#pragma compile(Icon, image/Setting_ico.ico)
+#pragma compile(UPX, True)
+#pragma compile(FileDescription, 'Software ZHOKL')
+#pragma compile(FileVersion, 1.0)
+FileChangeDir(@ScriptDir)
+
 #include <GUIConstants.au3>
 #include "./src/Telegram.au3"
 

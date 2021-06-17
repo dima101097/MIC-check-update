@@ -23,6 +23,14 @@ tTextNew - Текст передновой версией
 $cWeekday - параметр с номером дня недели, 1 - Воскресение .. 7 - Суботта
 #comments-end
 
+#NoTrayIcon
+#pragma compile(Out, MIC UPDATE.exe)
+#pragma compile(Icon, image/ico.ico)
+#pragma compile(UPX, True)
+#pragma compile(FileDescription, 'Software ZHOKL')
+#pragma compile(FileVersion, 2.0)
+FileChangeDir(@ScriptDir)
+
 #include "./src/Telegram.au3"
 #include <Date.au3>
 ;
