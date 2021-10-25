@@ -33,7 +33,10 @@ FileChangeDir(@ScriptDir)
 
 #include "./src/Telegram.au3"
 #include <Date.au3>
+#include <Date.au3>
 ;
+
+
 If WinExists (@ScriptName) Then  Exit
 AutoItWinSetTitle (@ScriptName)
 ;
@@ -46,6 +49,7 @@ Global $tINI = @WorkingDir &'\ini\telegram.ini'
  if ((FileOpen ( $mINI ) = -1) or (FileOpen ( $tINI ) = -1))  Then MsgBox (0,"Ошибка","Отсутствуют файлы конфигурации. " & @CRLF & 'Запустите "Config.exe" и проведите настройку.')
 
 Func main()
+   _log("Start " & _NowDate() & " " & _NowTime())
 $mINI = @WorkingDir &'\ini\mic.ini'
 $mURL = IniRead ($mINI, "MIC", "URL", "Укажите ссылку на страницу загрузки.")
 $mName = IniRead ($mINI, "MIC", "NAME", "Укажите данные для поиска.")
@@ -61,36 +65,61 @@ $tText = IniRead ($tINI, "TELEGRAM", "TEXT", "Текст бота (привет�
 $tTextCur = IniRead ($tINI, "TELEGRAM", "TEXT_VER_CUR", "Текст бота перед текущей версией")
 $tTextNew= IniRead ($tINI, "TELEGRAM", "TEXT_VER_NEW", "Текст бота перед новой версией")
 ;
+_log("Curent version: " & $mCurentVer)
+_log("Parsing HTML...")
 $mHTML = InetRead($mURL)
 $mHTML = BinaryToString($mHTML, $SB_UTF8)
 $mVersion = _ParserHTML($mHTML, $mName)
-
+_log("Version on web: " & $mVersion)
+_log("Parsing XML...")
 $mURLxml =  $mURLxml & $mVersion & '/clinic-' & $mVersion & '.xml'
 $mXML = InetRead($mURLxml)
 $mXML = BinaryToString($mXML, $SB_ANSI)
 $mVersion = _ParserXML($mXML, $mNameXML)
+_log("Version on xml: " & $mVersion)
 ;
-if $mCurentVer < $mVersion Then _telegramBot($mCurentVer, $mVersion, $tKey, $tChat, $tText, $tTextCur, $tTextNew)
+if $mCurentVer <> $mVersion Then
+   _telegramBot($mCurentVer, $mVersion, $tKey, $tChat, $tText, $tTextCur, $tTextNew)
+Else
+   _log ("Update not found")
+   EndIf
 ;
+_log("END " & _NowDate() &" "& _NowTime() & @CRLF & " ")
 EndFunc
 
 Func _ParserHTML (ByRef Const $mHTML, ByRef Const $mName)
+
     $mRExp = '(?isU)<a href="[^"]+">\s+„' & $mName & '“.+Версія:\s*(?-U)(\d+(?:\.\d+)+)'
   Local $mVer
   $mVer = StringRegExp($mHTML, $mRExp, $STR_REGEXPARRAYMATCH)
+
   If Not @error Then Return $mVer[0]
   Return SetError(1, 0, Null)
 EndFunc
 
 Func _ParserXML(ByRef Const $mXML, ByRef Const $mNameXML)
+
     $mRExp = '(?isU)<product .+' & $mNameXML & '\s*=\s*"(?-U)(\d+(?:\.\d+)+)"'
   Local $mVer
   $mVer = StringRegExp($mXML, $mRExp, $STR_REGEXPARRAYMATCH)
+
   If Not @error Then Return $mVer[0]
   Return SetError(1, 0, Null)
 EndFunc
 
 Func _telegramBot(ByRef Const $mCurentVer, ByRef Const $mVersion, Const $tKey, Const $tChat, Const $tText, Const $tTextCur, const $tTextNew)
+   _log("Send to telegram BOT...")
+   _log("Get parametr: "& $tTextCur & " " & $mCurentVer & " | " & $tTextNew & " " & $mVersion)
 _InitBot($tKey)
 _SendMsg($tChat, $tText & " " & $tTextCur & " " & $mCurentVer & " | " & $tTextNew & " " & $mVersion)
+EndFunc
+
+Func _log ($log)
+$hFile = FileOpen("LOG.txt", 1)
+If $hFile = -1 Then
+    MsgBox(4096, "Ошибка", "Невозможно открыть LOG файл.")
+    Exit
+ EndIf
+ FileWrite($hFile, $log & @CRLF)
+ FileClose($hFile)
 EndFunc

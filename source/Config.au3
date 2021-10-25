@@ -73,7 +73,7 @@ $iFolder = IniRead ($mINI, "MIC", "VERSION_INI", "")
    GUICtrlCreateLabel ("Текст текущей версии:", $gLeft, $gLeft + 90)
    $textCurent = GUICtrlCreateInput ($textCurent, $gLeft + 165, $gHeight + 85, 200)
   ;Text Ver New
-   GUICtrlCreateLabel ("Текст текущей версии:", $gLeft, $gLeft + 120)
+   GUICtrlCreateLabel ("Текст новой версии:", $gLeft, $gLeft + 120)
    $textNew = GUICtrlCreateInput ($textNew, $gLeft + 165, $gHeight + 115, 200)
 
    ;+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
@@ -163,5 +163,5 @@ Func _defaultConfig()
    IniWrite ($mINI,'MIC',"URL_XML","https://www.infomed.ck.ua/public/clinic/")
    IniWrite ($mINI,'MIC',"NAME_XML","full_version")
    IniWrite ($mINI,'MIC',"VERSION_INI","")
-
 EndFunc
+
